@@ -13,6 +13,9 @@ class WeatherService:
     self.db.update(weather_data['AIR_TEMPERATURE'], weather_data['AIR_HUMIDITY'], weather_data['AIR_PRESSURE'],
      weather_data['WIND_SPEED'], weather_data['MAX_WIND_GUST'], weather_data['WIND_DIRECTION'], weather_data['RAINFALL'], weather_data['UPDATED'])
 
+  def get_current_weather(self):
+    data = self.db.query('SELECT * FROM CURRENT_WEATHER')
+    return json.dumps(data[0])
 
 service = WeatherService()
 

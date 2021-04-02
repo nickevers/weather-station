@@ -9,7 +9,8 @@ weather_bp = Blueprint(
   
 @weather_bp.route('/current', methods=['GET'])
 def get_current():
-  return "current"
+  data = service.get_current_weather()
+  return Response(data, status=202, mimetype='application/json')
 
 @weather_bp.route('/current', methods=['POST'])
 def update_current():
