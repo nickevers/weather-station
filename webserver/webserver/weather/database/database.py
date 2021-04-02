@@ -1,6 +1,7 @@
 import MySQLdb, datetime, http.client, json, os
 import io
 import gzip
+import time
 
 class MysqlDatabase:
     def __init__(self):
@@ -37,7 +38,7 @@ class WeatherDatabase:
         self.update_template = "REPLACE INTO CURRENT_WEATHER (ID, AIR_TEMPERATURE, AIR_HUMIDITY, AIR_PRESSURE, WIND_SPEED, MAX_WIND_GUST, WIND_DIRECTION, RAINFALL, UPDATED) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s);"
 
 
-    def archive(self, air_temperature, air_humidity, air_pressure, wind_speed, max_wind_gust, wind_direction, rainfall, created = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")):
+    def archive(self, air_temperature, air_humidity, air_pressure, wind_speed, max_wind_gust, wind_direction, rainfall, created):
         params = (
             air_temperature,
             air_humidity,
@@ -50,7 +51,7 @@ class WeatherDatabase:
         print(self.archive_template % params)
         self.db.execute(self.archive_template, params)
 
-    def update(self, air_temperature, air_humidity, air_pressure, wind_speed, max_wind_gust, wind_direction, rainfall, updated = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")):
+    def update(self, air_temperature, air_humidity, air_pressure, wind_speed, max_wind_gust, wind_direction, rainfall, updated):
         params = (1,
             air_temperature,
             air_humidity,
@@ -60,8 +61,8 @@ class WeatherDatabase:
             wind_direction,
             rainfall,
             updated )
-        print(self.archive_template % params)
-        self.db.execute(self.archive_template, params)
+        print(self.update_template % params)
+        self.db.execute(self.update_template, params)
 
     def query(self, query):
       return self.db.query(query)

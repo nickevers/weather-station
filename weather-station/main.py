@@ -1,4 +1,4 @@
-from bme280 import Bme280Sensor
+from bme280sensor import Bme280Sensor
 from time import sleep
 from gate import Gate
 
