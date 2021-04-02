@@ -27,7 +27,8 @@ def save_archive():
     content = request.get_json()
     service.archive_weather(content)
     return Response(status=202)
-  except:
+  except Exception as e:
+    print(e)
     return Response(status=500)
 
   

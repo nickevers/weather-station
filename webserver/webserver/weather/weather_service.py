@@ -1,18 +1,15 @@
-# from .database import database
-import logging
+from .database import database
 
 class WeatherService:
   def __init__(self):
-  # self.db = database.WeatherDatabase()
-    pass
+    self.db = database.WeatherDatabase()
 
   def archive_weather(self, weather_data: dict):
-  # self.db.archive(weather_data['air_temperature'], weather_data['air_humidity'], weather_data['air_pressure'],
-  #  weather_data['wind_speed'], weather_data['max_wind_gust'], weather_data['wind_direction'], weather_data['rainfall'])
-    print(weather_data)
+    self.db.archive(weather_data['AIR_TEMPERATURE'], weather_data['AIR_HUMIDITY'], weather_data['AIR_PRESSURE'],
+     weather_data['WIND_SPEED'], weather_data['MAX_WIND_GUST'], weather_data['WIND_DIRECTION'], weather_data['RAINFALL'])
 
   def update_weather(self, weather_data: dict):
-    
+    pass
 
 
 service = WeatherService()
