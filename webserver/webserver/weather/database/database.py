@@ -16,17 +16,22 @@ class MysqlDatabase:
         self.cursor = self.connection.cursor()
 
     def execute(self, query, params = []):
-        try:
-            self.cursor.execute(query, params)
-            self.connection.commit()
-        except:
-            self.connection.rollback()
-            raise
+      cursor = self.connection.cursor()
+      try:
+          cursor.execute(query, params)
+          self.connection.commit()
+      except:
+          self.connection.rollback()
+          raise
+      cursor.close()
+        
 
     def query(self, query):
         cursor = self.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute(query)
-        return cursor.fetchall()
+        result = cursor.fetchall()
+        cursor.close()
+        return result
 
     def __del__(self):
         self.connection.close()
