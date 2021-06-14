@@ -16,6 +16,7 @@ class MysqlDatabase:
 
 
     def execute(self, query, params = []):
+<<<<<<< HEAD
         cursor = self.connection.cursor()
         try:
             cursor.execute(query, params)
@@ -26,14 +27,31 @@ class MysqlDatabase:
             raise
         cursor.nextset()
         cursor.close()
+=======
+      cursor = self.connection.cursor()
+      try:
+          cursor.execute(query, params)
+          self.connection.commit()
+      except:
+          self.connection.rollback()
+          raise
+      cursor.close()
+        
+>>>>>>> db82bf4df9b56aae9345681c9ffc692f17882564
 
     def query(self, query):
         cursor = self.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute(query)
+<<<<<<< HEAD
         data = cursor.fetchall()
         cursor.nextset()
         cursor.close()
         return data
+=======
+        result = cursor.fetchall()
+        cursor.close()
+        return result
+>>>>>>> db82bf4df9b56aae9345681c9ffc692f17882564
 
     def __del__(self):
         self.connection.close()
