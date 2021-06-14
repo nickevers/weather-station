@@ -2,7 +2,7 @@ from bme280sensor import Bme280Sensor
 from time import sleep
 from gate import Gate
 
-def calc_avg(measurements: []) -> dict:
+def calc_avg(measurements) -> dict:
   total_temperature = 0
   total_humidity = 0
   total_pressure = 0
